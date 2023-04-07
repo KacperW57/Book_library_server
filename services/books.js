@@ -146,3 +146,75 @@ exports.availableBooks = (req, res) => {
     }
   );
 };
+
+exports.rentBook = (req, res) => {
+  console.log(req.body);
+  const username = req.body.username;
+  const bookname = req.body.bookname;
+
+  db.query(
+    "SELECT isAdmin FROM libraryUsers WHERE login = ?",
+    [username],
+    async (error, results) => {
+      if (error) {
+        console.log(error);
+      }
+      if (results.length == 0) {
+        console.log("No such users!");
+        return res.sendStatus(403);
+      }
+      if (results[0].isAdmin == 1) {
+        console.log("Admins cannot rent books!");
+        return res.sendStatus(403);
+      }
+
+      db.query(
+        `UPDATE libraryBooks SET rentedBy="${username}" WHERE name="${bookname}"`,
+        (error, results) => {
+          if (error) {
+            console.log(erorr);
+          } else {
+            console.log(`Book ${bookname} rented to ${username}!`);
+            return res.sendStatus(200);
+          }
+        }
+      );
+    }
+  );
+};
+
+exports.returnBook = (req, res) => {
+  console.log(req.body);
+  const username = req.body.username;
+  const bookname = req.body.bookname;
+
+  db.query(
+    "SELECT isAdmin FROM libraryUsers WHERE login = ?",
+    [username],
+    async (error, results) => {
+      if (error) {
+        console.log(error);
+      }
+      if (results.length == 0) {
+        console.log("No such users!");
+        return res.sendStatus(403);
+      }
+      if (results[0].isAdmin == 1) {
+        console.log("Admins cannot return books!");
+        return res.sendStatus(403);
+      }
+
+      db.query(
+        `UPDATE libraryBooks SET rentedBy="" WHERE name="${bookname}"`,
+        (error, results) => {
+          if (error) {
+            console.log(erorr);
+          } else {
+            console.log(`Book ${bookname} returned by ${username}!`);
+            return res.sendStatus(200);
+          }
+        }
+      );
+    }
+  );
+};

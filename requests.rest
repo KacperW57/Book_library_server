@@ -23,10 +23,10 @@ POST http://localhost:3000/books/addBook
 Content-Type: application/json
 
 {
-    "name": "Lord of the rings",
-    "ISBN": 1924,
-    "author": "J. R. R. Tolkien",
-    "rentedBy": "",
+    "name": "Quo vadis",
+    "ISBN": 1500,
+    "author": "Henryk Sienkiewicz",
+    "rentedBy": "Maciej",
     "login": "KacperAdmin"
 
 }
@@ -37,7 +37,6 @@ Content-Type: application/json
 {
     "name": "Lord of the rings",
     "login": "KacperAdmin"
-
 }
 
 ###
@@ -54,3 +53,24 @@ Content-Type: application/json
 
 ###
 GET  http://localhost:3000/books/allbooks 
+###
+GET  http://localhost:3000/books/availablebooks 
+###
+
+PUT http://localhost:3000/books/rentBook
+Content-Type: application/json
+
+{
+    "bookname": "Lord of the rings",
+    "username": "Kacper"
+}
+
+###
+
+PUT http://localhost:3000/books/returnBook
+Content-Type: application/json
+
+{
+    "bookname": "Lord of the rings",
+    "username": "Kacper"
+}
