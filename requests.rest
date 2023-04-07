@@ -1,0 +1,32 @@
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name": "KacperAdmin",
+    "login": "KacperAdmin",
+    "password": "kacper123",
+    "passwordConfirm": "kacper123",
+    "isAdmin": true
+}
+###
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "login": "KacperAdmin",
+    "password": "kacper123"
+}
+###
+GET  http://localhost:3000 
+###
+POST http://localhost:3000/books/addBook
+Content-Type: application/json
+
+{
+    "name": "Lord of the rings",
+    "ISBN": 1924,
+    "author": "J. R. R. Tolkien",
+    "rentedBy": "",
+    "login": "KacperAdmin"
+
+}
