@@ -30,3 +30,27 @@ Content-Type: application/json
     "login": "KacperAdmin"
 
 }
+###
+DELETE http://localhost:3000/books/deleteBook
+Content-Type: application/json
+
+{
+    "name": "Lord of the rings",
+    "login": "KacperAdmin"
+
+}
+
+###
+PUT http://localhost:3000/books/editBook
+Content-Type: application/json
+
+{
+    "name": "Lord of the rings",
+    "ISBN": 2005,
+    "author": "J. R. R. Tolkien",
+    "rentedBy": "",
+    "login": "KacperAdmin"
+}
+
+###
+GET  http://localhost:3000/books/allbooks 

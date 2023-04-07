@@ -125,3 +125,24 @@ exports.editBook = (req, res) => {
     }
   );
 };
+
+exports.allBooks = (req, res) => {
+  db.query("SELECT * FROM libraryBooks", async (error, results) => {
+    if (error) {
+      console.log(error);
+    }
+    res.json(results);
+  });
+};
+
+exports.availableBooks = (req, res) => {
+  db.query(
+    'SELECT * FROM libraryBooks WHERE rentedBy=""',
+    async (error, results) => {
+      if (error) {
+        console.log(error);
+      }
+      res.json(results);
+    }
+  );
+};
