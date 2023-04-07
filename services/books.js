@@ -169,14 +169,31 @@ exports.rentBook = (req, res) => {
       }
 
       db.query(
-        `UPDATE libraryBooks SET rentedBy="${username}" WHERE name="${bookname}"`,
-        (error, results) => {
+        "SELECT rentedBy FROM libraryBooks WHERE name = ?",
+        [bookname],
+        async (error, results) => {
           if (error) {
-            console.log(erorr);
-          } else {
-            console.log(`Book ${bookname} rented to ${username}!`);
-            return res.sendStatus(200);
+            console.log(error);
           }
+          if (results.length == 0) {
+            console.log("There is no book with this name!");
+            return res.sendStatus(403);
+          }
+          if (results[0].rentedBy != "") {
+            console.log("This book is already rented!");
+            return res.sendStatus(403);
+          }
+          db.query(
+            `UPDATE libraryBooks SET rentedBy="${username}" WHERE name="${bookname}"`,
+            (error, results) => {
+              if (error) {
+                console.log(erorr);
+              } else {
+                console.log(`Book ${bookname} rented to ${username}!`);
+                return res.sendStatus(200);
+              }
+            }
+          );
         }
       );
     }
