@@ -29,4 +29,5 @@ user functionalities:
 ## other info
 
 you can start the server with "npm start" command in the terminal
+
 requests.rest file is used for testing rest api connection
